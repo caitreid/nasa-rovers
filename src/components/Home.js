@@ -4,21 +4,24 @@ import Card from 'react-bootstrap/Card'
 
 const Home = (props) => {
 
-    console.log('props', props.rovers)
+    // console.log('props', props.rovers)
 
     const rovers = props.rovers
 
     // let rovers = [1,2,3,4]
 
     const roverCards = rovers.map((rover) => (
+        <Card key={rover.id}>
+          <h2>{rover.name}</h2>
+          <p><b>Landing Date:</b> {rover.landing_date}</p>
+          <p><b>Launch Date:</b> {rover.launch_date}</p>
+          <p><b>Total Photos:</b> {rover.total_photos}</p>
+          <b>Cameras:</b>
+            <ul>
+                { rover.cameras.map(camera => <li> { camera.full_name} </li>) }
+            </ul>
 
-
-
-        // <Card key={rover.id}>
-        //   {/* <h1>{rover.name}</h1> */}
-        //   <p>--</p>
-        // </Card>
-        <h1>{rover.name}</h1>
+        </Card>
     ))
 
 

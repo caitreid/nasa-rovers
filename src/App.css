@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  text-align: left;
+  
 }
 
 .App-logo {
@@ -22,12 +23,14 @@
   justify-content: left;
   font-size: calc(10px + 2vmin);
   background-color: rgb(0, 149, 198);
+  padding: 2rem;
 }
 
 .card {
   border: 1px solid black;
   border-radius: 10px;
   margin:1rem;
+  padding: 2rem;
 }
 
 .App-link {
