@@ -47,7 +47,7 @@ function App() {
     <Fragment>
       <Routes>
         <Route path='/' element={<Home rovers={rovers} />} />
-        {/* <Route path='/rovers/:id' element={<Detail rover={rover} /> } /> */}
+        <Route path='/rovers/:name' element={<Detail rovers={rovers} /> } />
       </Routes>
     </Fragment>
   );

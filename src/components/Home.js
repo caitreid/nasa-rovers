@@ -12,13 +12,13 @@ const Home = (props) => {
 
     const roverCards = rovers.map((rover) => (
         <Card key={rover.id}>
-          <h2>{rover.name}</h2>
+          <Link to={`/rovers/${rover.name}`}><h2>{rover.name}</h2></Link>
           <p><b>Landing Date:</b> {rover.landing_date}</p>
           <p><b>Launch Date:</b> {rover.launch_date}</p>
           <p><b>Total Photos:</b> {rover.total_photos}</p>
           <b>Cameras:</b>
             <ul>
-                { rover.cameras.map(camera => <li> { camera.full_name} </li>) }
+                { rover.cameras.map((camera, id) => <li key={id}> { camera.full_name} </li>) }
             </ul>
 
         </Card>
@@ -33,7 +33,6 @@ const Home = (props) => {
                 <h1>Nasa Rovers</h1>
             </header>
             <div>{ roverCards }</div>
-
         </div>
     )
 }
