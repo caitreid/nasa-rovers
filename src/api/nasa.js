@@ -1,18 +1,15 @@
 import axios from 'axios'
 
-export const getRovers = async (limit, id) => {
-    const url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=DEMO_KEY'
+const url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/'
+const api_key = 'WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al'
 
-    return await axios(url, {params})
-    .then((resp) => {
-        const rovers = resp.data.map((rover) => ({
-            name: rover.name,
-            
-        }));
-        return {rovers}
-    })
-    .catch((error) => {
-        console.log('Error getting Rovers', error)
-        throw error;
-    })
+
+export const getRovers = () => {
+    const params = {
+        api_key: api_key
+    }
+    
+    return axios.get(url, {params})
+        .then(data => console.log(data.data))
+        .catch(error => console.log(error))
 }
