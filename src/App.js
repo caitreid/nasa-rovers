@@ -17,6 +17,7 @@ function App() {
     fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al')
     .then(response => response.json())
     .then(data => setRovers(data.rovers))
+    .catch(error => console.log('error ', error))
   }, [])
 
   console.log(rovers)
