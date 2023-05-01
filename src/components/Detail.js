@@ -5,29 +5,49 @@ import { Container } from 'react-bootstrap'
 
 const Detail = (props) => {
 
-    const [photos, setPhotos] = useState(null)
-    const [error, setError] = useState(false)
+    const [photos, setPhotos] = useState([])
+    const [error, setError] = useState(null)
 
     const { name } = useParams() 
 
-    console.log(name)
-
+    // console.log(name)
 
     let date = new Date().toLocaleDateString();
 
     let earth_date = new Date().toJSON().slice(0, 10);
 
-    useEffect(() => {
-        fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${earth_date}&api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al`)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .then(data => setPhotos(data.photos))
-        .catch((error) => {
-            setError(true)
-        })
-    }, [])
+    let url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-04-28&api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al'
+
+    // useEffect(() => {
+    //     // fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${earth_date}&api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al`)
+    //     fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-04-28&api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al')
+    //     .then(response => response.json())
+    //     .then(response => console.log('fetched response', response))
+    //     .then(data => setPhotos(data.photos))
+    //     .catch((error) => { setError(error) })
+    // }, [])
     
-    console.log(photos)
+    // if (error) {
+    //     console.log('error:', error)
+    // }
+
+    useEffect(() => {
+        fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-04-28&api_key=WFoLeQ8yDhDg0UtHCA19L8B2Z6xNPdpmwAppl5al')
+          .then(response => response.json())
+          .then(data => {
+            if (data && data.photos) {
+              setPhotos(data.photos);
+            } else {
+              setError('Error: unexpected response from API');
+            }
+          })
+          .catch((error) => {
+            setError(error);
+          });
+    }, []);
+      
+    console.log('photos: ', photos)
+
 
     if (!photos) {
         return (
@@ -40,19 +60,22 @@ const Detail = (props) => {
                     <p><b>Date:</b> { date }</p>
                     <p> Earth date: { earth_date }</p>
                     <p>No photos!</p>
-                    {/* <p>{ error.message }</p> */}
-                </Container>
-                
+                </Container>                
             </>
         )
     }
 
+    
+
     if (photos) {
+
         const photoCards = photos.map((photo, id) => (
+            // console.log(photo) 
             <div key={id}>
-                <image src={photo.img_src}/>
+                <img src={photo.img_src}/>
             </div>
         ))
+        
 
         return (
             <>
